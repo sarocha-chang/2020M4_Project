@@ -2,8 +2,12 @@ body{
     margin: 0;
 }
 /* nav */
+nav{
+    background-color: #242424;
+}
 .navbar img{
     margin-left: 10px;
+
 }
 .nav-link{
     color: white;
@@ -21,7 +25,6 @@ body{
 }
 .search {
     position:relative;
-    box-shadow: 0 0 40px rgba(51, 51, 51, .1)
 }
 
 .search input {
@@ -46,3 +49,9 @@ body{
 
     background: #FFCC57
 }
+/*จบ search*/
+
+/*footer{
+    background-color: black;
+    padding:15px ;
+}*/
