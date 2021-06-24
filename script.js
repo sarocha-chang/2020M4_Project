@@ -43,11 +43,12 @@ function Movie(data) {
 function showMovie(movie){
     const display = document.getElementById('showMovie')
     display.style.margin = "50px";
+    display.style.backgroundColor="white"
     let div = document.createElement('div')
     div.style.width= "24rem"
     div.style.padding = "50px";
     div.style.border="thin solid rgb(0,0,0,.125)";
-     let pic = document.createElement('img')
+    let pic = document.createElement('img')
     pic.setAttribute('src',movie.image_url)
     pic.style.borderRadius = "5px";
     pic.style.height="22rem"
@@ -144,6 +145,7 @@ function displayMyFav(movie){
     displaySearch.style.display = 'block'
     const display = document.getElementById('showFavMovie')    
     display.style.margin = "50px";
+    display.style.backgroundColor="white"
     let div = document.createElement('div')
     div.style.width= "24rem"
     div.style.padding = "50px";
@@ -251,6 +253,7 @@ function detailMV(ID){
 function showdetailMV(movie){
     console.log("show")
     const display = document.getElementById('showDetail')    
+    display.style.backgroundColor="white"
     let div = document.createElement('div')
     div.classList.add("d-flex")
     div.style.height= "35rem"
