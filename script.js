@@ -290,6 +290,7 @@ function showdetailMV(movie){
     btnBack.addEventListener('click', (event) => { 
         hideAll()
         document.getElementById('showDetail').innerHTML=" "
+        displaySearch.style.display = 'block'
         displayF.style.display = 'block'
     	})
     div1.appendChild(btnBack)  
