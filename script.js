@@ -7,7 +7,7 @@ function hideAll() {
 	displayS.style.display = 'none'
     displayF.style.display = 'none'
     displayD.style.display = 'none'
-
+    scrollToTopBtn.style.display = 'none'
 }
 
 function hideSearch(){
@@ -15,6 +15,7 @@ displaySearch.style.display = 'none'
 }
 
 function onLoad() {
+    hideAll()
     displaySearch.style.display = 'block'
 
 }
@@ -42,6 +43,7 @@ function Movie(data) {
 
 function showMovie(movie){
     const display = document.getElementById('showMovie')
+    scrollToTopBtn.style.display = 'block'
     display.style.margin = "50px";
     display.style.backgroundColor="white"
     let div = document.createElement('div')
@@ -144,6 +146,7 @@ function MovieFav(data) {
 
 function displayMyFav(movie){
     displaySearch.style.display = 'block'
+    scrollToTopBtn.style.display = 'block'
     const display = document.getElementById('showFavMovie')    
     display.style.margin = "50px";
     display.style.backgroundColor="white"
@@ -212,6 +215,7 @@ document.getElementById('navfav').addEventListener('click', (event) => {
 
 document.getElementById('home').addEventListener('click', (event) => {
     hideAll()
+    
     displaySearch.style.display = 'block'
 
     console.log(555)
@@ -247,6 +251,7 @@ function detailMV(ID){
     }).then((data) => {
         hideSearch()
         hideAll()
+        
         displayD.style.display = 'block'
         showdetailMV(data)
       })
@@ -302,3 +307,15 @@ function showdetailMV(movie){
     display.appendChild(div)
 
 }
+
+var scrollToTopBtn = document.getElementById("scrollToTopBtn")
+var rootElement = document.documentElement
+
+function scrollToTop() {
+
+  rootElement.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  })
+}
+scrollToTopBtn.addEventListener("click", scrollToTop)

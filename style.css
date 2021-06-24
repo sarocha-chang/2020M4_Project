@@ -52,3 +52,15 @@ nav{
     background: #FFCC57
 }
 /*จบ search*/
+#scrollToTopBtn {
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    color: black;
+    cursor: pointer;
+    font-size: 25px;
+    line-height: 70px;
+    width: 70;
+    float: right;
+    margin-bottom: 25px;
+  }
