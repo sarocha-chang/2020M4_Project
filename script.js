@@ -253,8 +253,8 @@ function showdetailMV(movie){
     const display = document.getElementById('showDetail')    
     let div = document.createElement('div')
     div.classList.add("d-flex")
-    div.style.height= "40rem"
-    div.style.padding = "50px"
+    div.style.height= "35rem"
+    div.style.padding = "40px"
     div.style.border="thin solid rgb(0,0,0,.125)";
     let pic = document.createElement('img')
     pic.setAttribute('src',movie.image_url)
