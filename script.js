@@ -1,12 +1,23 @@
 var displayS = document.getElementById('showMV')
 var displayF = document.getElementById('showFMV')
+var displayD = document.getElementById('showD')
+var displaySearch = document.getElementById('search')
 
 function hideAll() {
 	displayS.style.display = 'none'
     displayF.style.display = 'none'
+    displayD.style.display = 'none'
+
 }
 
+function hideSearch(){
+displaySearch.style.display = 'none'
+}
 
+function onLoad() {
+    displaySearch.style.display = 'block'
+
+}
 //เอาไว้สำหรับหน้าแรก show กับ search 
 document.getElementById('searchButton').addEventListener('click', (event) => {
 	let mvname = document.getElementById('inputText').value
@@ -22,6 +33,8 @@ document.getElementById('searchButton').addEventListener('click', (event) => {
 })
 
 function Movie(data) {
+    document.getElementById('showMovie').innerHTML=" "
+
     for (movie of data){
         showMovie(movie)
     }
@@ -40,7 +53,7 @@ function showMovie(movie){
     pic.style.height="22rem"
     pic.style.maxWidth="20rem"
     pic.style.padding="15px"
-    pic.addEventListener('click',(event)=>{
+    pic.addEventListener('dblclick',(event)=>{
         var txt;
         if (confirm('Do you want to add '+ movie.title + ' to favoutie movie ?')) {
           /*txt = "Confirm! Let's go to your favourite list of movie";
@@ -120,13 +133,15 @@ function myFavMovie(){
     })
 }
 
-function MovieFav(data) {        
+function MovieFav(data) {
+    document.getElementById('showFavMovie').innerHTML=" "  
     for (movie of data){
         displayMyFav(movie)
     }
 }
 
 function displayMyFav(movie){
+    displaySearch.style.display = 'block'
     const display = document.getElementById('showFavMovie')    
     display.style.margin = "50px";
     let div = document.createElement('div')
@@ -153,8 +168,6 @@ function displayMyFav(movie){
 	btndetail.innerText = 'Detail'
     btndetail.addEventListener('click', (event) => { 
         detailMV(movie.id)
-        hideAll()
-        showdetailMV()
 	})
     div.appendChild(btndetail)  
     btndetail.style.marginLeft = "20px"
@@ -187,6 +200,7 @@ function displayMyFav(movie){
 document.getElementById('navfav').addEventListener('click', (event) => {
     hideAll()
     displayF.style.display = 'block'
+    displaySearch.style.display = 'block'
     myFavMovie()
 })
 
@@ -194,6 +208,8 @@ document.getElementById('navfav').addEventListener('click', (event) => {
 
 document.getElementById('home').addEventListener('click', (event) => {
     hideAll()
+    displaySearch.style.display = 'block'
+
     console.log(555)
 
 })
@@ -208,7 +224,7 @@ function deleteMV(ID){
             throw Error(response.statusText)
         }
     }).then(data=>{
-        location.reload()
+        hideAll()
         myFavMovie()
         displayF.style.display = 'block'
     }).catch(error=>{
@@ -218,17 +234,66 @@ function deleteMV(ID){
 // จบdelete
 
 function detailMV(ID){
-    fetch(`https://se104-project-backend.du.r.appspot.com/movies/632110354/${ID}`, {
+    fetch(`https://se104-project-backend.du.r.appspot.com/movie/632110354/${ID}`, {
         method: 'GET'
     }).then((res) => {
         if (res.status === 200) {
             return res.json();
         }
     }).then((data) => {
-
+        hideSearch()
+        hideAll()
+        displayD.style.display = 'block'
+        showdetailMV(data)
       })
 }
 
-function showdetailMV(){
-    console.log(5)
+function showdetailMV(movie){
+    console.log("show")
+    const display = document.getElementById('showDetail')    
+    let div = document.createElement('div')
+    div.classList.add("d-flex")
+    div.style.height= "40rem"
+    div.style.padding = "50px"
+    div.style.border="thin solid rgb(0,0,0,.125)";
+    let pic = document.createElement('img')
+    pic.setAttribute('src',movie.image_url)
+    pic.style.borderRadius = "5px";
+    pic.style.height="30rem"
+    pic.style.marginBottom="25px"  
+    pic.style.marginRight="25px"  
+    div.appendChild(pic)
+    let div1 = document.createElement('div')
+    let name = document.createElement('h3')
+    name.innerText = movie.title  
+    div1.appendChild(name)
+    let des =document.createElement('p')
+    des.innerText = "Synopsis: "+ movie.synopsis
+    div1.appendChild(des)
+    let type = document.createElement('p')
+    type.innerText = "Type: "+ movie.type
+    div1.appendChild(type)
+    let episode = document.createElement('p')
+    episode.innerText = "Episode: "+ movie.episodes
+    div1.appendChild(episode)
+    let score = document.createElement('p')
+    score.innerText = "Score: "+ movie.score
+    div1.appendChild(score)
+    let rate = document.createElement('p')
+    rate.innerText = "Rated: "+ movie.rated
+    div1.appendChild(rate)
+    let btnBack = document.createElement('button')
+    btnBack.classList.add('btn')
+    btnBack.classList.add('btn-primary')
+    btnBack.setAttribute('type', 'button')
+	btnBack.innerText = 'Back'
+    btnBack.addEventListener('click', (event) => { 
+        hideAll()
+        document.getElementById('showDetail').innerHTML=" "
+        displayF.style.display = 'block'
+    	})
+    div1.appendChild(btnBack)  
+    div.appendChild(div1)
+    display.appendChild(div)
+
 }
