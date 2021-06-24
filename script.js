@@ -16,6 +16,7 @@ document.getElementById('searchButton').addEventListener('click', (event) => {
 		return response.json()
 	}).then((data) => { 
 		console.log(data)
+        displayS.style.display = 'block'
         Movie(data.results)
 	})
 })
@@ -119,14 +120,14 @@ function myFavMovie(){
     })
 }
 
-function MovieFav(data) {
+function MovieFav(data) {        
     for (movie of data){
         displayMyFav(movie)
     }
 }
 
 function displayMyFav(movie){
-    const display = document.getElementById('showFavMovie')
+    const display = document.getElementById('showFavMovie')    
     display.style.margin = "50px";
     let div = document.createElement('div')
     div.style.width= "24rem"
@@ -151,6 +152,9 @@ function displayMyFav(movie){
     btndetail.setAttribute('type', 'button')
 	btndetail.innerText = 'Detail'
     btndetail.addEventListener('click', (event) => { 
+        detailMV(movie.id)
+        hideAll()
+        showdetailMV()
 	})
     div.appendChild(btndetail)  
     btndetail.style.marginLeft = "20px"
@@ -183,11 +187,16 @@ function displayMyFav(movie){
 document.getElementById('navfav').addEventListener('click', (event) => {
     hideAll()
     displayF.style.display = 'block'
-
     myFavMovie()
 })
 
+//เพิ่มเติมกลับไปยังหน้า search จาก nav
 
+document.getElementById('home').addEventListener('click', (event) => {
+    hideAll()
+    console.log(555)
+
+})
 // delete from favourite list 
 function deleteMV(ID){
     fetch(`https://se104-project-backend.du.r.appspot.com/movie?id=632110354&&movieId=${ID}`,{
@@ -199,10 +208,27 @@ function deleteMV(ID){
             throw Error(response.statusText)
         }
     }).then(data=>{
-        hideAll()
+        location.reload()
         myFavMovie()
         displayF.style.display = 'block'
     }).catch(error=>{
         alert('Can not find this movie id')
     })
+}
+// จบdelete
+
+function detailMV(ID){
+    fetch(`https://se104-project-backend.du.r.appspot.com/movies/632110354/${ID}`, {
+        method: 'GET'
+    }).then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        }
+    }).then((data) => {
+
+      })
+}
+
+function showdetailMV(){
+    console.log(5)
 }
