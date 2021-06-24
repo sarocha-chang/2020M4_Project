@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-image: url(images/bg.jpg) 
+    background-image: url(images/bg.jpg);
 }
 /* nav */
 nav{
@@ -52,18 +52,3 @@ nav{
     background: #FFCC57
 }
 /*จบ search*/
-
-/*footer{
-    background-color: black;
-    padding:15px ;
-}*/
-
-/*แต่ง js showfavmovie
-#showFavMovie{
- margin: 50px;
-    }
-#showFavMovie>div{
-width: 24rem;
-padding: 50px;
-border:thin solid rgb(0,0,0,.125);
-}*/
